@@ -1,6 +1,6 @@
 import OpenAI from "openai"
 
-import { OPENAI_API_KEY } from "../constants"
+import { OPENAI_API_KEY } from "./constants"
 
 if (!OPENAI_API_KEY) {
   console.error("Missing OPENAI_API_KEY environment variable")
