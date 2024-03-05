@@ -6,10 +6,10 @@ import { createCompletion, createStreamCompletion } from "./openai.service"
 export const openAIRoutes = (app: Elysia) => {
   app.group("/openai", app =>
     app
-      .post("/completions", async ({ body: { prompt } }) => await createCompletion({ prompt }), {
+      .post("/completions", async ({ body: { messages } }) => await createCompletion({ messages }), {
         body: chatCompletionsDTO
       })
-      .post("/completions/stream", async ({ body: { prompt } }) => createStreamCompletion({ prompt }), {
+      .post("/completions/stream", async ({ body: { messages } }) => createStreamCompletion({ messages }), {
         body: chatCompletionsDTO
       })
   )
