@@ -1,0 +1,22 @@
+{
+  "name": "@noroff/openai-api-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production bun src/index.ts",
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^0.8.0",
+    "@elysiajs/stream": "^0.8.0",
+    "@elysiajs/swagger": "^0.8.5",
+    "ai": "^3.0.5",
+    "elysia": "latest",
+    "openai": "^4.28.4"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}

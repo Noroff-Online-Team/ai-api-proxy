@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: openai-api-proxy
+    runtime: docker
+    region: frankfurt
+    plan: starter
+    autoDeploy: false
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
