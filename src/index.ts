@@ -22,7 +22,7 @@ app.use(swaggerPlugin)
 
 app.use(routes)
 
-app.get("*", () => ({
+app.all("*", () => ({
   message: "Hello, world!"
 }))
 
