@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: openai-api-proxy
+    name: ai-api-proxy
     runtime: docker
     region: frankfurt
     plan: starter

@@ -2,7 +2,7 @@ version: "3"
 
 services:
   api:
-    container_name: openai-proxy
+    container_name: ai-proxy
     restart: always
     env_file:
       - .env

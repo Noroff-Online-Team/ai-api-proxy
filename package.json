@@ -1,5 +1,5 @@
 {
-  "name": "@noroff/openai-api-proxy",
+  "name": "@noroff/ai-api-proxy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
