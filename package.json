@@ -11,12 +11,16 @@
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/stream": "^0.8.0",
     "@elysiajs/swagger": "^0.8.5",
+    "@prisma/client": "^5.10.2",
     "ai": "^3.0.5",
     "elysia": "latest",
+    "elysia-http-error": "^1.2.0",
+    "elysia-rate-limit": "^2.0.1",
     "openai": "^4.28.4"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prisma": "^5.10.2"
   },
   "module": "src/index.js"
 }
