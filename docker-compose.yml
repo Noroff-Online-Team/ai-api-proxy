@@ -1,9 +1,22 @@
 version: "3"
 
 services:
+  db:
+    container_name: ai-db
+    image: postgres:16
+    restart: "no"
+    env_file:
+      - .env
+    volumes:
+      - postgres_storage:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - noroff
+
   api:
     container_name: ai-proxy
-    restart: always
+    restart: "no"
     env_file:
       - .env
     build:
@@ -11,3 +24,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - noroff
+
+volumes:
+  postgres_storage:
+
+networks:
+  noroff:

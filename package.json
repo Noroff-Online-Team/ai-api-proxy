@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production bun src/index.ts",
+    "start:migrate:prod": "bunx prisma migrate deploy && bun dist/index.js",
     "dev": "bun run --watch src/index.ts",
     "build": "bun build src/index.ts --outdir dist"
   },
