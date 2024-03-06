@@ -4,6 +4,7 @@ import { PORT } from "./lib/constants"
 
 import { swaggerPlugin } from "./plugins/swagger"
 import { corsPlugin } from "./plugins/cors"
+import { rateLimitPlugin } from "./plugins/rate-limit"
 
 import { routes } from "./modules/routes"
 
@@ -19,6 +20,7 @@ const app = new Elysia()
 
 app.use(corsPlugin)
 app.use(swaggerPlugin)
+app.use(rateLimitPlugin)
 
 app.use(routes)
 
