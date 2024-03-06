@@ -25,7 +25,9 @@ app.use(rateLimitPlugin)
 app.use(routes)
 
 app.all("*", () => ({
-  message: "Hello, world!"
+  message: "Welcome to the Noroff AI Proxy API!",
+  github: "https://github.com/Noroff-Online-Team/ai-api-proxy",
+  swagger: "https://ai.api.noroff.dev/docs"
 }))
 
 app.listen(PORT, server => {
