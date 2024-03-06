@@ -18,9 +18,15 @@ new Elysia()
     github: "https://github.com/Noroff-Online-Team/ai-api-proxy",
     swagger: "https://ai.api.noroff.dev/docs"
   }))
-  .all("*", () => ({
-    message: "Hello, world!"
-  }))
+  .all("*", ({ set }) => {
+    const statusCode = 404
+    set.status = statusCode
+
+    return {
+      status: "Not Found",
+      statusCode
+    }
+  })
   .listen(PORT, server => {
     console.log(`🦊 Server running at http://${server?.hostname}:${server?.port}`)
   })
