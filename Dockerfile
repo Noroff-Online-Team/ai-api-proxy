@@ -3,15 +3,14 @@ FROM oven/bun AS builder
 
 WORKDIR /app
 
-COPY package.json .
-COPY bun.lockb .
-
-RUN bun install
-
+COPY package.json bun.lockb ./
+COPY prisma prisma
 COPY src src
 COPY tsconfig.json .
 
-RUN bun run build --outdir dist
+# Install dependencies and build the project
+RUN bun install && \
+    bun run build --outdir dist
 
 # Runner stage
 FROM oven/bun
@@ -19,12 +18,12 @@ FROM oven/bun
 WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
-COPY package.json .
-COPY bun.lockb .
+COPY package.json bun.lockb ./
+COPY prisma prisma
 
 RUN bun install --production
 
 ENV NODE_ENV production
-CMD ["bun", "dist/index.js"]
+CMD ["bun", "start:migrate:prod"]
 
 EXPOSE 3000
