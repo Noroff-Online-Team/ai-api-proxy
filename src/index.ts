@@ -12,12 +12,12 @@ new Elysia()
   .use(corsPlugin)
   .use(swaggerPlugin)
   .use(rateLimitPlugin)
-  .use(routes)
   .get("/", () => ({
     message: "Welcome to the Noroff AI Proxy API!",
     github: "https://github.com/Noroff-Online-Team/ai-api-proxy",
     swagger: "https://ai.api.noroff.dev/docs"
   }))
+  .use(routes)
   .all("*", ({ set }) => {
     const statusCode = 404
     set.status = statusCode
@@ -25,6 +25,17 @@ new Elysia()
     return {
       status: "Not Found",
       statusCode
+    }
+  })
+  .onError(({ code, error }) => {
+    switch (code) {
+      case "VALIDATION":
+        return error.all
+      default:
+        return {
+          name: error.name,
+          message: error.message
+        }
     }
   })
   .listen(PORT, server => {

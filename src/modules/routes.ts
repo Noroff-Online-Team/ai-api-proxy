@@ -1,17 +1,20 @@
 import Elysia from "elysia"
 import { httpErrorDecorator } from "elysia-http-error"
-import { openAIRoutes } from "./openai/openai.route"
-import { db } from "../lib/db"
 
-const API_KEY_HEADER = "X-Noroff-API-Key"
+import { db } from "../lib/db"
+import { ADMIN_API_KEY, NOROFF_API_KEY_HEADER, ADMIN_PROTECTED_ROUTES } from "../lib/constants"
+
+import { openAIRoutes } from "./openai/openai.route"
+import { apiKeyRoutes } from "./apikey/apikey.route"
 
 export const routes = new Elysia()
   .use(httpErrorDecorator)
   .decorate("db", db)
   .guard(
     {
-      async beforeHandle({ headers, db, HttpError }) {
-        const apiKey = headers[API_KEY_HEADER.toLowerCase()]
+      async beforeHandle({ headers, db, HttpError, request }) {
+        const apiKey = headers[NOROFF_API_KEY_HEADER.toLowerCase()]
+        const { pathname } = new URL(request.url)
 
         // If the API key is missing, return an error
         if (!apiKey) {
@@ -21,6 +24,14 @@ export const routes = new Elysia()
         // If the API key is an array, return an error
         if (Array.isArray(apiKey)) {
           throw HttpError.BadRequest("API key must be a string")
+        }
+
+        // If path is protected and the API key is the admin key, allow the request. If not, return an error
+        if (ADMIN_PROTECTED_ROUTES.includes(pathname)) {
+          if (apiKey === ADMIN_API_KEY) {
+            return
+          }
+          throw HttpError.Forbidden("You don't have permission to access this resource")
         }
 
         // Find the key in the database
@@ -34,5 +45,5 @@ export const routes = new Elysia()
         }
       }
     },
-    app => app.use(openAIRoutes)
+    app => app.use(openAIRoutes).use(apiKeyRoutes)
   )
