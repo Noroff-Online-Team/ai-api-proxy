@@ -1,7 +1,10 @@
 import Elysia from "elysia"
 import { httpErrorDecorator } from "elysia-http-error"
-import { openAIRoutes } from "./openai/openai.route"
+
 import { db } from "../lib/db"
+
+import { openAIRoutes } from "./openai/openai.route"
+import { apiKeyRoutes } from "./apikey/apikey.route"
 
 const API_KEY_HEADER = "X-Noroff-API-Key"
 
@@ -34,5 +37,5 @@ export const routes = new Elysia()
         }
       }
     },
-    app => app.use(openAIRoutes)
+    app => app.use(openAIRoutes).use(apiKeyRoutes)
   )
