@@ -6,7 +6,7 @@ export const swaggerPlugin = (app: Elysia) =>
   app.use(
     swagger({
       path: "/docs",
-      exclude: ["/docs", "/docs/json"],
+      exclude: ["/api-key/", "/docs", "/docs/json"],
       documentation: {
         info: {
           title: "Noroff AI API Proxy",
