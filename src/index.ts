@@ -27,6 +27,17 @@ new Elysia()
       statusCode
     }
   })
+  .onError(({ code, error }) => {
+    switch (code) {
+      case "VALIDATION":
+        return error.all
+      default:
+        return {
+          name: error.name,
+          message: error.message
+        }
+    }
+  })
   .listen(PORT, server => {
     console.log(`🦊 Server running at http://${server?.hostname}:${server?.port}`)
   })
