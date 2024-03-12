@@ -10,7 +10,7 @@ COPY tsconfig.json .
 
 # Install dependencies and build the project
 RUN bun install && \
-    bun run build --outdir dist
+    bun run build --target node --outdir dist
 
 # Runner stage
 FROM oven/bun

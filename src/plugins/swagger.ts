@@ -1,6 +1,6 @@
 import type Elysia from "elysia"
 import packageJson from "../../package.json"
-import swagger from "@elysiajs/swagger"
+import { swagger } from "@elysiajs/swagger"
 
 export const swaggerPlugin = (app: Elysia) =>
   app.use(
